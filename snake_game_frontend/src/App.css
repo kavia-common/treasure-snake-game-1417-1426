@@ -1,104 +1,228 @@
-/* CSS Variables for Theme Management */
-:root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+:root{
+  /* Ocean Professional palette */
+  --ocean-primary: #EC4899;  /* pink */
+  --ocean-secondary: #8B5CF6;/* purple */
+  --ocean-success: #10B981;  /* green */
+  --ocean-error: #EF4444;    /* red */
+  --ocean-bg: #FDF2F8;       /* soft pink background */
+  --ocean-surface: #FFFFFF;  /* cards / surface */
+  --ocean-surface-alt: #F3F4F6;
+  --ocean-text: #374151;     /* slate-700 */
+  --ocean-muted: #6B7280;    /* slate-500 */
+  --ocean-gradient-a: #FCE7F3;
+  --ocean-gradient-b: #EDE9FE;
+  --ocean-gradient-c: #DBEAFE;
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04);
+  --shadow-md: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--ocean-text);
+  background: linear-gradient(135deg, var(--ocean-gradient-a), var(--ocean-gradient-b), var(--ocean-gradient-c));
+  background-attachment: fixed;
 }
 
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.ocean-app {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
+}
+
+/* Top bar */
+.ocean-navbar {
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55));
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ocean-text);
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.brand-badge{
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, var(--ocean-primary), var(--ocean-secondary));
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+.score-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ocean-surface);
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 10px 14px;
+  border-radius: 12px;
   font-weight: 600;
+  color: var(--ocean-muted);
+  box-shadow: var(--shadow-md);
+}
+
+.score-value{
+  display: inline-flex;
+  min-width: 56px;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--ocean-secondary), var(--ocean-primary));
+  box-shadow: 0 0 0 3px rgba(139,92,246,0.15);
+}
+
+/* Main layout */
+.ocean-main{
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content:center;
+  padding: 24px;
+}
+
+.game-panel{
+  background: var(--ocean-surface);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 18px;
+  padding: 18px 18px 14px;
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 860px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Canvas center with soft frame */
+.canvas-wrap{
+  background: linear-gradient(135deg, rgba(236,72,153,0.12), rgba(139,92,246,0.12));
+  border: 1px solid rgba(236,72,153,0.25);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.6);
+  overflow: hidden;
+  display: inline-flex;
+}
+
+.game-canvas{
+  border-radius: 12px;
+  background: var(--ocean-bg);
+  transform-origin: top left; /* for scaling */
+  image-rendering: pixelated;
+  box-shadow: var(--shadow-md);
+}
+
+/* Controls section */
+.controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.btn{
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform .08s ease, box-shadow .2s ease, filter .15s ease;
+  box-shadow: var(--shadow-md);
+  color: #fff;
+  min-width: 110px;
+  letter-spacing: .2px;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.btn:disabled{
+  cursor: not-allowed;
+  opacity: .6;
+  filter: grayscale(0.2);
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.btn.primary{
+  background: linear-gradient(135deg, var(--ocean-primary), var(--ocean-secondary));
+}
+.btn.primary:hover{ transform: translateY(-1px); }
+
+.btn.secondary{
+  background: linear-gradient(135deg, var(--ocean-secondary), var(--ocean-primary));
+}
+.btn.secondary:hover{ transform: translateY(-1px); }
+
+.hint{
+  flex-basis: 100%;
+  text-align: center;
+  color: var(--ocean-muted);
+  font-size: 14px;
+  margin-top: 6px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Footer legend */
+.ocean-footer{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 16px 12px 28px;
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+.legend{
+  background: var(--ocean-surface);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 9999px;
+  padding: 8px 10px;
+  box-shadow: var(--shadow-md);
+  display: inline-flex;
+  gap: 8px;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ocean-text);
+  padding: 6px 10px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 1px dashed rgba(0,0,0,0.08);
+}
+
+.pill.snake{ border-color: var(--ocean-secondary); }
+.pill.treasure{ border-color: var(--ocean-primary); }
+.pill.danger{ border-color: var(--ocean-error); }
+
+/* Responsiveness */
+@media (max-width: 900px){
+  .game-panel{ max-width: 720px; }
+}
+@media (max-width: 740px){
+  .ocean-navbar{ padding: 12px 16px; }
+  .score-value{ min-width: 48px; }
+  .game-panel{ padding: 14px 14px 12px; }
+  .canvas-wrap{ padding: 12px; }
 }
